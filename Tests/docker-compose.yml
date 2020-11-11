@@ -1,0 +1,23 @@
+version: '3'
+services:
+    drupalContainer:
+        image: "drupal:9.0-apache"
+        environment: 
+            - DRUPAL_DB_PASSWORD=admin
+        links: 
+            - mysqlContainer:mysql
+        ports:
+            - "8080:8080" 
+            - "8081:8081"
+        volumes:
+            - C:\docker\drupal\code:/code
+            - C:\docker\drupal\html:/var/www/html
+    mysqlContainer:
+        image: "mysql:8"
+        environment: 
+            - MYSQL_ROOT_PASSWORD=admin
+            - MYSQL_DATABASE=drupal
+        ports: 
+            - "3306:3306"
+        volumes: 
+            - C:\docker\mysqldb:/var/lib/mysql
